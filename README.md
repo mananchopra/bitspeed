@@ -42,3 +42,5 @@ you will get the response in this format:
     ]
 }
 
+If anyone wants I can make code live from my local using ngrok and can share base url in private so that you can access data from my db.
+
