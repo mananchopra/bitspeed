@@ -11,11 +11,11 @@ const { Sequelize } = require('sequelize');
 // });
 const sequelize = new Sequelize({
   dialect: "mysql",
-  host: "dpg-ciftu55gkuvojje5954g-a",
-  port: 5432,
-  username: "mananchopradev",
-  password: "HWdcyESwGCk6fIE7fdVtyZjXYeZb17F7",
-  database: "devfluxkart_7bu4"
+  host: "sql12.freemysqlhosting.net",
+  port: 3306,
+  username: "sql12629852",
+  password: "c2lWZAglit",
+  database: "sql12629852"
 });
 
 sequelize
