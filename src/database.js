@@ -1,21 +1,13 @@
 const { Sequelize } = require('sequelize');
+require('dotenv').config();
 
-// Create a new Sequelize instance
-// const sequelize = new Sequelize({
-//   dialect: "mysql",
-//   host: "localhost",
-//   port: 3306,
-//   username: 'Manan_chopra',
-//   password: 'P@s$w0rd123!',
-//   database: 'FluxKart',
-// });
 const sequelize = new Sequelize({
   dialect: "mysql",
-  host: "sql12.freemysqlhosting.net",
-  port: 3306,
-  username: "sql12629852",
-  password: "c2lWZAglit",
-  database: "sql12629852"
+  host: process.env.host,
+  port: process.env.port,
+  username: process.env.username,
+  password: process.env.password,
+  database: process.env.database
 });
 
 sequelize
