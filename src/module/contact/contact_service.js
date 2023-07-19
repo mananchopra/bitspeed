@@ -2,6 +2,11 @@ const contactRepository = require('./contact_repository')
 const _ = require('lodash')
 
 const getContacts = async(email, phoneNumber) => {
+    if(!email && !phoneNumber) {
+        throw new Error('Both Email and phoneNumber are empty.')
+    }
+    if(!email) email = null
+    if(!phoneNumber) phoneNumber = null
     const UserContactInfo = await contactRepository.getContactsByEmailorMobile(email,phoneNumber)
     let contact = {}
     contact.primaryContatctId = UserContactInfo?.primaryContact?.id
@@ -10,11 +15,11 @@ const getContacts = async(email, phoneNumber) => {
     let info = new Set()
     info.add(UserContactInfo.primaryContact.id)
     for (let userContact of UserContactInfo.contacts) {
-        if(!info.has(userContact.email)) {
+        if(!info.has(userContact.email) && userContact.email != null) {
             contact.emails.push(userContact.email)
             info.add(userContact.email)
         }
-        if(!info.has(userContact.phoneNumber)) {
+        if(!info.has(userContact.phoneNumber) && userContact.phoneNumber != null) {
             contact.phoneNumbers.push(userContact.phoneNumber)
             info.add(userContact.phoneNumber)
         }
