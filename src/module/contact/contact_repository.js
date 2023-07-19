@@ -13,7 +13,16 @@ const updateContactWithLinkedIdChange = async (Ids, linkedId) => {
 }
 
 const getContactsByEmailorMobile = async (email, phoneNumber) => {
-    let contacts = await contact.findAll({where: {[Op.or]: [{email: email}, {phoneNumber: phoneNumber}]}});
+    let contacts
+    if(email && phoneNumber) {
+        contacts = await contact.findAll({where: {[Op.or]: [{email: email}, {phoneNumber: phoneNumber}]}});
+    } else if(email){
+        contacts = await contact.findAll({where: {email: email}});
+    } else if(phoneNumber){
+        contacts = await contact.findAll({where: {phoneNumber: phoneNumber}});
+    } else {
+        throw new Error('both email and phoneNumber not present.')
+    }
     if(_.isEmpty(contacts)) {
         let createdContact = await createContact({"phoneNumber": phoneNumber,
         "linkedId": null,
@@ -71,7 +80,7 @@ const getContactsByEmailorMobile = async (email, phoneNumber) => {
         "linkedId": null,
         "linkPrecedence": "primary",
         "email":email})
-    } else if(_.isEmpty(emailContacts) || _.isEmpty(phoneNumberContacts)) {
+    } else if((_.isEmpty(emailContacts) && email != null) || (_.isEmpty(phoneNumberContacts) && phoneNumber != null)) {
         createdContact = await createContact({"phoneNumber": phoneNumber,
         "linkedId": primaryContact.id,
         "linkPrecedence": "secondary",
