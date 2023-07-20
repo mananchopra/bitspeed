@@ -4,7 +4,13 @@
 
 HOSTED ON : https://manna-project-bitspeed.onrender.com
 
-CURL TO CREATE OR GET STORED DATA: curl --location --request POST 'https://manna-project-bitspeed.onrender.com/api/identify?email=manan40edu&phoneNumber=123456'
+CURL TO CREATE OR GET STORED DATA: 
+curl --location 'https://manna-project-bitspeed.onrender.com/api/identify' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "manan@gmail.com",
+    "phoneNumber": "7488454584"
+}'
 
 For the first hit on API, it will take time as the server has to start. After the first hit it produces results quickly as it is a free server site so it gets automatically off once not in use. 
 
